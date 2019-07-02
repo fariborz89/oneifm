@@ -1,9 +1,13 @@
 package com.one_ifm.minimum_over_capacity.models;
 
 
+import io.swagger.annotations.ApiModelProperty;
 
 public class SeniorJuniorNums {
+
+    @ApiModelProperty(value = "number of seniors")
     private Integer senior;
+    @ApiModelProperty(value = "number of juniors")
     private Integer junior;
 
     public SeniorJuniorNums() {}
