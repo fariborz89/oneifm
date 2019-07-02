@@ -29,6 +29,8 @@ public class CapacityCalcServicesImpl implements CapacityCalcServices {
             throw new InvalidInputException("Inputs can not be null");
         if (request.getSenior() <= 0 || request.getJunior() <= 0)
             throw new InvalidInputException("senior capacity and junior capacity can not be negative");
+        if (request.getJunior() > request.getSenior())
+            throw new InvalidInputException("Senior capacity can not be less than junior capacity");
 
 
         Integer maxNumberOfRooms = Collections.max(request.getRooms());
