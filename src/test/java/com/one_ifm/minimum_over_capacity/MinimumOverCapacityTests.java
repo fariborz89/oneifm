@@ -96,34 +96,21 @@ public class MinimumOverCapacityTests {
     public void testWithNegativeSenior() throws Exception {
         List<Integer> rooms = new ArrayList<>();
         rooms.add(30); rooms.add(29);
-
-        CapacityCalcRequest request = new CapacityCalcRequest();
-        request.setSenior(-2);
-        request.setJunior(3);
-        request.setRooms(rooms);
-        mockMvc.perform(
-                post("/calculation")
-                        .content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-
+        doTheRequestWith4xx(rooms, -3, 4);
     }
 
     @Test
     public void testWithNegativeJunior() throws Exception {
         List<Integer> rooms = new ArrayList<>();
         rooms.add(30); rooms.add(29);
+        doTheRequestWith4xx(rooms, 3, -1);
+    }
 
-        CapacityCalcRequest request = new CapacityCalcRequest();
-        request.setSenior(2);
-        request.setJunior(-3);
-        request.setRooms(rooms);
-        mockMvc.perform(
-                post("/calculation")
-                        .content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-
+    @Test
+    public void testWithSeniorLessThanJunior() throws Exception {
+        List<Integer> rooms = new ArrayList<>();
+        rooms.add(30); rooms.add(29);
+        doTheRequestWith4xx(rooms, 3, 4);
     }
 
     private List<SeniorJuniorNums> doTheRequest(List<Integer> rooms, Integer senior, Integer junior) throws Exception {
@@ -141,5 +128,18 @@ public class MinimumOverCapacityTests {
         String content = result.getResponse().getContentAsString();
         List<SeniorJuniorNums> list = Arrays.asList(objectMapper.readValue(content, SeniorJuniorNums[].class));
         return list;
+    }
+
+    private void doTheRequestWith4xx(List<Integer> rooms, Integer senior, Integer junior) throws Exception {
+        CapacityCalcRequest request = new CapacityCalcRequest();
+        request.setSenior(senior);
+        request.setJunior(junior);
+        request.setRooms(rooms);
+        mockMvc.perform(
+                post("/calculation")
+                        .content(objectMapper.writeValueAsString(request))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
+
     }
 }
