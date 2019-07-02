@@ -30,6 +30,7 @@ public class CapacityCalcServicesImpl implements CapacityCalcServices {
         if (request.getSenior() <= 0 || request.getJunior() <= 0)
             throw new InvalidInputException("senior capacity and junior capacity can not be negative");
 
+
         Integer maxNumberOfRooms = Collections.max(request.getRooms());
         setupMaps(request.getSenior(), request.getJunior(), maxNumberOfRooms);
 
