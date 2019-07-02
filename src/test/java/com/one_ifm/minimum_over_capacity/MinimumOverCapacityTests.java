@@ -89,7 +89,20 @@ public class MinimumOverCapacityTests {
 
         Assert.assertTrue(response.get(1).getSenior() == 14);
         Assert.assertTrue(response.get(1).getJunior() == 1);
+    }
 
+    @Test
+    public void test4() throws Exception {
+        List<Integer> rooms = new ArrayList<>();
+        rooms.add(80); rooms.add(69);
+
+        List<SeniorJuniorNums> response = doTheRequest(rooms, 8, 6);
+        Assert.assertTrue(response.size() == 2);
+        Assert.assertTrue(response.get(0).getSenior() == 10);
+        Assert.assertTrue(response.get(0).getJunior() == 0);
+
+        Assert.assertTrue(response.get(1).getSenior() == 8);
+        Assert.assertTrue(response.get(1).getJunior() == 1);
     }
 
     @Test
