@@ -75,7 +75,10 @@ minOverCap(roomNums, senior, junior) =
  prevent problems of recursive functions.
 
 ## Future works
--We can improve the code buy creating a map of the solution for subtrees
+- We can improve the code buy creating a map of the solution for subtrees
 just for the rooms that are in input not all the smaller rooms.
+- This service can not handle concurrent requests, becasue the two maps ```mapOfMinOverCapacity``` and ```tempMapOfMinOverCapacity``` that defined in the class and it has the problem of race condition. We can solve this problem by taking these maps into the functions. 
+
+
 
 
