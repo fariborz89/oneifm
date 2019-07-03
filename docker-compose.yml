@@ -1,0 +1,7 @@
+version: '3.0'
+services:
+  docker-min-over-cap:
+    image: farib/min-over-cap
+    container_name: docker-min-over-cap
+    ports:
+      - 8080:8080
