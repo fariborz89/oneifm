@@ -9,13 +9,17 @@ To run the project you have two ways
 - run by CLI
 
 #### Run by docker
-You need to have docker on your system. Go to the root directory of the
+You need to have docker on your system and maven. Go to the root directory of the
 project(change directory in terminal) and run this command:
 
+
+```bash
+mvn package
+```
+And after it
 ```bash
 docker build -t farib/min-over-cap .
 ```
-
 next step is to go to run docker-compose:
 ```bash
 docker-compose up -d 
