@@ -19,9 +19,18 @@ public class CapacityCalcServicesImpl implements CapacityCalcServices {
 
     private static Logger logger = LoggerFactory.getLogger(CapacityCalcServicesImpl.class);
 
+    // The map with the solutions for our problem
     private Map<Integer, SeniorJuniorNums> mapOfMinOverCapacity;
+
+    // The map with the solutions for our problem just without the rule of at least on senior is necessary
     private Map<Integer, SeniorJuniorNums> tempMapOfMinOverCapacity;
 
+    /**
+     *
+     * @param request Object of the array of the rooms and the capacity of senior and junior cleaner
+     * @return List of objects that shows the number of seniors and juniors for the rooms with the minimum over capacity
+     * @throws InvalidInputException
+     */
     @Override
     public List<SeniorJuniorNums> capacityCalculations(CapacityCalcRequest request) throws InvalidInputException {
 
@@ -33,6 +42,7 @@ public class CapacityCalcServicesImpl implements CapacityCalcServices {
             throw new InvalidInputException("Senior capacity can not be less than junior capacity");
 
 
+        // we solve the problems for all the number of rooms that are smaller that the maxRooms
         Integer maxNumberOfRooms = Collections.max(request.getRooms());
         setupMaps(request.getSenior(), request.getJunior(), maxNumberOfRooms);
 
@@ -46,10 +56,15 @@ public class CapacityCalcServicesImpl implements CapacityCalcServices {
     }
 
     private void setupMaps(Integer seniorCapacity, Integer juniorCapacity, Integer maxSizeOfMap) {
+        // First we create the temp map which doesn't have the rule of one senior is necessary
         buildingTempMap(seniorCapacity, juniorCapacity, maxSizeOfMap);
+        // We Create the main map(which includes or answers) by using the temp map
         buildMainMap(seniorCapacity, maxSizeOfMap);
     }
 
+
+    /* The minimum over capacity can be found by recursive algorithm(which its changed to dynamic programming)
+    if min == min {min of (rooms - senior capacity) , min or (rooms - junior capacity)}*/
     private void buildingTempMap(Integer seniorCapacity, Integer juniorCapacity, Integer maxSizeOfMap) {
         tempMapOfMinOverCapacity = new HashMap<>();
 
