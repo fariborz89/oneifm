@@ -57,7 +57,7 @@ Now its up.
 ## Usage
 In order to use this project API, there is swagger automatic
 documentation, you just need to go to this address:
-[localhost:8080 swagger-ui ](localhost:8080/swagger-ui.html) you will
+[localhost:8080 swagger-ui] (localhost:8080/swagger-ui.html) you will
 see the parameters to do requests to the restful api.
 
 ## Hint
